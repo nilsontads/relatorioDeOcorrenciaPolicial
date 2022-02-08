@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./../../template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        Página Inicial
+    </ui:define>
+
+    <ui:define name="top">
+        <h:form id="formMenu">
+            <p:growl id="msgGeral"/>
+            <p:toolbar>
+                <f:facet name="right">
+                    <p:commandButton type="push" title="Página Inicial" value="Página Inicial" action="inicio?faces-redirect=true"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                    </span>
+                    <p:menuButton value="Ocorrências">
+                        <p:menuitem value="Cadastrar Ocorrência" actionListener="#{usuarioControler.limparFormOcorrencia()}" 
+                                    action="cadOcorrencias?faces-redirect=true" >
+                            <p:ajax resetValues="true"/>
+                        </p:menuitem>
+                    </p:menuButton>
+                </f:facet>
+                <f:facet name="left">
+                    <h:panelGroup>
+                        <center>
+                            <p:commandLink action="meusDados?faces-redirect=true">
+                                <p:graphicImage id="imgMenu" style="width: 45px;height: 45px;margin-top: 10px" name="#{usuarioControler.imagemPolicial()}"/>
+                            </p:commandLink>
+                            <br/>
+                            <p:menuButton value="Olá! #{usuarioControler.ub.servidor.nome}">
+                                <p:menuitem value="Meus Dados" url="meusDados.xhtml" />
+                                <p:menuitem value="Sair" icon="fa fa-sign-out" action="#{usuarioControler.logout()}" />
+                            </p:menuButton>
+                        </center>
+                    </h:panelGroup>
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+         <ui:insert name="centroPolicial">
+
+        </ui:insert>
+    </ui:define>
+
+    <ui:define name="bottom">
+       
+    </ui:define>
+
+</ui:composition>

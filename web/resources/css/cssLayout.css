@@ -1,0 +1,42 @@
+
+#top {
+    position: relative;
+    color: white;
+    padding: 5px;
+    margin: -10px -10px 0px -10px;
+}
+
+#bottom {
+    position: relative;
+    padding: 5px;
+    bottom: 0px;
+    width: 100%;
+}
+
+.center_content {
+    position: relative;
+    padding: 5px;
+    margin: -10px -10px 0px -10px;
+}
+
+
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+.gridCadastro .label{
+    text-align: right;
+}
+
+.gridCadastro .campo{
+    text-align: left;
+}

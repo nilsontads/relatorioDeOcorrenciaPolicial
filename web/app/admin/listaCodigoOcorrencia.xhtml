@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./paginaInicial.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="centroAdmin">
+
+        <h:form id="formu">
+            <p:growl autoUpdate="true"/>
+            <center>
+                <p:toolbar>
+                    <f:facet name="left">
+                        <p:commandButton value="Novo" icon="ui-icon-document" oncomplete="PF('codOcorrencia').show()"
+                                         action="#{usuarioControler.tipoOcorrencia}"/>
+                        <span class="ui-separator">
+                            <span class="ui-icon ui-icon-grip-dotted-vertical"/>
+                        </span>
+                    </f:facet>
+                </p:toolbar>
+                <p:panel header="TIPO DE OCORRÊNCIAS" style="margin-top: 2px" styleClass="ui-fluid" >
+                    <p:dataTable value="#{usuarioControler.listTipoOcorrencias}" var="tipo_ocorrencia" rows="3" paginator="true"
+                                 reflow="true" rowHover="true" saveOnCellBlur="true" 
+                                 paginatorPosition="bottom" id="pes_tip_ocorrencia" style="margin-top: 5px" 
+                                 filteredValue="#{tipoOcorrenciaController.filtroOcorrencia}" emptyMessage="Não há Ocorrências"
+                                 sortOrder="ascending">
+
+                        <p:column headerText="Código" width="auto">
+                            <center>
+                                #{tipo_ocorrencia.codigo}
+                            </center>
+                        </p:column>
+
+                        <p:column headerText="Código de Ocorrência">
+                            <center>
+                                #{tipo_ocorrencia.codOcorrencia}
+                            </center>
+                        </p:column>
+
+                        <p:column headerText="Descrição" >
+
+                            #{tipo_ocorrencia.descricao}
+
+                        </p:column>
+                        <p:column headerText="Ação" width="40">
+                            <p:commandButton title="Alterar" icon="ui-icon-pencil" 
+                                             actionListener="#{usuarioControler.selecionarTipoOcorrencia(tipo_ocorrencia.codigo)}" 
+                                             oncomplete="PF('edicao').show()" 
+                                             update="formu:ed"
+                                             process="@this, formu:ed"
+                                             />
+
+                            <p:commandButton title="Excluir" icon="ui-icon-trash" 
+                                             action="#{usuarioControler.excluirTipoOcorrencia(tipo_ocorrencia)}" process="@this"  
+                                             update="pes_tip_ocorrencia">
+                                <p:confirm icon="ui-icon-alert" header=" Confirmação de Exclusão" message="Tem Certeza que Deseja Excluir?" />
+                            </p:commandButton>
+                        </p:column>
+
+                    </p:dataTable>
+                </p:panel>
+            </center>
+            <p:dialog header="Novo Código" widgetVar="codOcorrencia" id="cod-ocorrencia" resizable="false"
+                      modal="true" responsive="true">
+                <div class="ui-fluid">
+                    <p:panelGrid columns="2" id="painel-dialogo" layout="grid" styleClass="panelgrid-noborder">
+                        <p:outputLabel value="cod-ocorrencia" for="cod-oc"/>
+                        <p:inputText id="cod-oc" value="#{usuarioControler.tipoOcorrencia.codOcorrencia}"/>
+
+                        <p:outputLabel value="descricao" for="desc" />
+                        <p:inputText id="desc" value="#{usuarioControler.tipoOcorrencia.descricao}"/>
+                        <p:outputLabel/>
+                        <p:commandButton value="salvar" action="#{usuarioControler.inserirTipoOcorrencia()}" process="cod-ocorrencia"
+                                         update="pes_tip_ocorrencia"
+                                         onclick="PF('cod-ocorrencia').hide()" />
+                    </p:panelGrid>
+                </div>
+            </p:dialog>
+
+            <p:dialog header="Edição" widgetVar="edicao" id="ed" resizable="false" modal="true" responsive="true">
+
+                <p:panelGrid columns="2" class="ui-fluid" layout="grid">
+                    <p:outputLabel value="codigo" />
+                    <p:inputText id="cod" value="#{usuarioControler.tipoOcorrencia.codOcorrencia}"/>
+                    <p:outputLabel value="descrição"/>
+                    <p:inputText id="descricao" value="#{usuarioControler.tipoOcorrencia.descricao}"/>
+                    <p:commandButton value="Alterar" action="#{usuarioControler.editarTipoOcorrencia()}" update="pes_tip_ocorrencia" onclick="PF('cod-ocorrencia').hide()"/>
+                </p:panelGrid>
+
+            </p:dialog>
+
+        </h:form>
+        <h:form>
+            <p:confirmDialog global="true" responsive="true" showEffect="fade" hideEffect="fade" >
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no"/>
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" oncomplete="confirmacao.hide()"/>
+            </p:confirmDialog>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

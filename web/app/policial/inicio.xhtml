@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./templetePolicial.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="centroPolicial">
+        <h:form id="formu">
+            <p:messages autoUpdate="true" closable="true"/>
+            <center>
+
+                <p:panel header="OCORRENCIAS" style="margin-top: 5px; width: 80%" styleClass="ui-fluid">
+                    <p:dataTable value="#{usuarioControler.listOcorrencias}" var="ocorrencia" rows="15" paginator="true"
+                                 reflow="true" rowHover="true" saveOnCellBlur="true" 
+                                 paginatorPosition="bottom" id="pes_tip_ocorrencia" style="margin-top: 5px" 
+                                 filteredValue="#{tipoOcorrenciaController.filtroOcorrencia}" emptyMessage="Não há Ocorrências">
+
+                        <p:column headerText="Código de Ocorrência" style="width: 10%" >
+                            <center>
+                                #{ocorrencia.codigo}
+                            </center>
+                        </p:column>
+
+                        <p:column headerText="Data" >
+                            <h:outputText value="#{ocorrencia.data}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" dateStyle="full" locale="pt_BR"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Unidade" sortBy="#{ocorrencia.policial.unidade_sucap}" filterBy="#{ocorrencia.policial.unidade_sucap}">
+                            #{ocorrencia.policial.unidade_sucap}
+                        </p:column>
+
+                        <p:column headerText="Setor" sortBy="#{ocorrencia.setor}" filterBy="#{ocorrencia.setor}">
+                            #{ocorrencia.setor}
+                        </p:column>
+
+                        <p:column headerText="Ação" width="60">
+                            <p:commandButton icon="fa fa-print" process="@this" update="@this" title="Imprimir"
+                                             action="#{usuarioControler.gerarRelatorioDeUsuário(ocorrencia.codigo)}"
+                                             ajax="false" onclick="this.form.target = '_blank', setInterval('atualizar()', 10000)">
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </center>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

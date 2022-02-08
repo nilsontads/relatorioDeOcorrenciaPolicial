@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./../../template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="title">
+        Página Inicial
+    </ui:define>
+    
+    <ui:define name="top">
+        <h1>CENTRAL</h1>
+        <h:form>
+            <p:commandButton value="SAIR" action="#{usuarioControler.logout()}"/> 
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+        content
+    </ui:define>
+
+    <ui:define name="bottom">
+        bottom
+    </ui:define>
+
+</ui:composition>
+
+<!--
+
+ <p:messages id="msgs"/>
+            <p:panel id="panelPrincipal" header="Meus Dados" >
+                <p:accordionPanel id="panel1" multiple="true" var="usuario" 
+                                  value="#{usuarioControler.ubOFF}" >
+
+                    <p:tab title="DADOS PESSOAIS">
+                        <center>
+                            <p:panelGrid  columns="1">
+                                <p:graphicImage id="imgPanel" style="width: 95px;height: 95px;margin-top: 10px"  
+                                                name="#{usuarioControler.imagemServidor()}"/>
+                            </p:panelGrid>
+                            <p:outputLabel  value="#{usuario.cargo}" style="font-size: 14px; text-align: center; font-weight : bold"/>
+                            <br/>
+                            <br/>
+                            <p:fileUpload fileUploadListener="#{usuarioControler.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                                          sizeLimit="1000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" 
+                                          cancelLabel="Cancelar" uploadLabel="Salvar" label="Imagem"  
+                                          oncomplete="setInterval('atualizar()', 1900)"/>
+
+                        </center>
+                        <p:panelGrid id="grid1" columns="4" layout="grid" class="gridCadastro" columnClasses="label, campo, label, campo">
+                            <p:outputLabel id="cod" for="codText" value="cod:"/>
+                            <h:panelGroup>
+                                <p:outputLabel id="codText" styleClass="texto"
+                                               value="#{usuario.codigo}"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel id="numMatricula" for="numMatriculaText" value="Nº Matrícula:"/>
+                            <h:panelGroup>
+                                <p:outputLabel id="numMatriculaText" styleClass="texto" value="#{usuario.servidor.num_matricula}"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel id="nome" for="nomeText" value="Nome:"/>
+                            <h:panelGroup>
+                                <p:outputLabel  id="nomeText" 
+                                                value="#{usuario.servidor.nome}"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel id="sexo" for="nomeSexo" value="Sexo:"/>
+                            <h:panelGroup>
+                                <p:outputLabel  id="nomeSexo" 
+                                                value="#{usuario.servidor.sexo}"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel id="rg" for="rgText" value="RG:"/>
+                            <h:panelGroup>
+                                <p:outputLabel id="rgText" value="#{usuario.servidor.rg}" />
+                            </h:panelGroup>
+
+                            <p:outputLabel id="cpf" for="cpfText" value="CPF:"/>
+                            <h:panelGroup>
+                                <p:outputLabel id="cpfText" value="#{usuario.servidor.cpf}" />
+                            </h:panelGroup>
+
+                            <p:outputLabel id="dataNasc" for="dataNascText" value="Data de Nascimento:"/>
+                            <h:panelGroup>
+                                <p:outputLabel id="dataNascText" value="#{usuario.servidor.dataNascimento}" >
+                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                </p:outputLabel>
+                            </h:panelGroup>
+
+                        </p:panelGrid>
+                    </p:tab>
+
+
+                </p:accordionPanel>
+
+
+                <f:facet name="footer">
+                    <p:panelGrid columns="1" layout="grid" >
+                        <h:panelGroup>
+                            <center>
+                                <p:commandButton value="ALTERAR DADOS" process="@this"
+                                                 onclick="PF('dialDados').show()"/>
+
+                                <p:commandButton value="ALTERAR SENHA DE ACESSO" oncomplete="PF('dialSenha').show()" 
+                                                 process="dialogoSenha"/>
+                            </center>
+                        </h:panelGroup>
+                    </p:panelGrid>
+                </f:facet>
+            </p:panel>
+
+-->

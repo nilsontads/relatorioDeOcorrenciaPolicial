@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_rop2" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fbe17c15-bcfd-458e-997b-01e6e6521468">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="94"/>
+	<subDataset name="dataset1" uuid="5cddb0eb-0d5e-4ad8-9ff5-b62ed55f768c">
+		<parameter name="id" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     ocorrencia."codigo" AS ocorrencia_codigo,
+     ocorrencia_tipoocorrencia."ocorrencia_codigo" AS ocorrencia_tipoocorrencia_ocorrencia_codigo,
+     ocorrencia_tipoocorrencia."tipoocorrencia_codigo" AS ocorrencia_tipoocorrencia_tipoocorrencia_codigo
+FROM
+     "public"."ocorrencia" ocorrencia INNER JOIN "public"."ocorrencia_tipoocorrencia" ocorrencia_tipoocorrencia ON ocorrencia."codigo" = ocorrencia_tipoocorrencia."ocorrencia_codigo"
+WHERE
+     ocorrencia_tipoocorrencia."ocorrencia_codigo" = $P{id}]]>
+		</queryString>
+		<field name="ocorrencia_codigo" class="java.lang.Integer"/>
+		<field name="ocorrencia_tipoocorrencia_ocorrencia_codigo" class="java.lang.Integer"/>
+		<field name="ocorrencia_tipoocorrencia_tipoocorrencia_codigo" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="dataset2" uuid="69990631-c8ab-420b-9719-e9fda899ddf7">
+		<parameter name="id2" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     ocorrencia."codigo" AS ocorrencia_codigo,
+     ocorrencia_tipoprovidencia."ocorrencia_codigo" AS ocorrencia_tipoprovidencia_ocorrencia_codigo,
+     ocorrencia_tipoprovidencia."tipoprovidencia_codigo" AS ocorrencia_tipoprovidencia_tipoprovidencia_codigo
+FROM
+     "public"."ocorrencia" ocorrencia INNER JOIN "public"."ocorrencia_tipoprovidencia" ocorrencia_tipoprovidencia ON ocorrencia."codigo" = ocorrencia_tipoprovidencia."ocorrencia_codigo"
+WHERE
+     ocorrencia_tipoprovidencia."ocorrencia_codigo" = $P{id2}]]>
+		</queryString>
+		<field name="ocorrencia_codigo" class="java.lang.Integer"/>
+		<field name="ocorrencia_tipoprovidencia_ocorrencia_codigo" class="java.lang.Integer"/>
+		<field name="ocorrencia_tipoprovidencia_tipoprovidencia_codigo" class="java.lang.Integer"/>
+	</subDataset>
+	<subDataset name="dataset3" uuid="be74947d-ef6a-47a6-9d4c-dd6e9fa327fd">
+		<parameter name="id3" class="java.lang.Integer">
+			<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+		</parameter>
+		<queryString>
+			<![CDATA[SELECT
+     ocorrencia."codigo" AS ocorrencia_codigo,
+     ocorrencia_tiposervicoprestado."ocorrencia_codigo" AS ocorrencia_tiposervicoprestado_ocorrencia_codigo,
+     ocorrencia_tiposervicoprestado."tiposervicoprestado_codigo" AS ocorrencia_tiposervicoprestado_tiposervicoprestado_codigo
+FROM
+     "public"."ocorrencia" ocorrencia INNER JOIN "public"."ocorrencia_tiposervicoprestado" ocorrencia_tiposervicoprestado ON ocorrencia."codigo" = ocorrencia_tiposervicoprestado."ocorrencia_codigo"
+
+WHERE  ocorrencia_tiposervicoprestado."ocorrencia_codigo"=$P{id3}]]>
+		</queryString>
+		<field name="ocorrencia_codigo" class="java.lang.Integer"/>
+		<field name="ocorrencia_tiposervicoprestado_ocorrencia_codigo" class="java.lang.Integer"/>
+		<field name="ocorrencia_tiposervicoprestado_tiposervicoprestado_codigo" class="java.lang.Integer"/>
+	</subDataset>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\PROJETO TCC\\rop6\\src\\java\\relatoriosReports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cod" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     ocorrencia."codigo" AS ocorrencia_codigo,
+     ocorrencia."bairro" AS ocorrencia_bairro,
+     ocorrencia."data" AS ocorrencia_data,
+     ocorrencia."historico" AS ocorrencia_historico,
+     ocorrencia."horachegada" AS ocorrencia_horachegada,
+     ocorrencia."horafinal" AS ocorrencia_horafinal,
+     ocorrencia."horainicial" AS ocorrencia_horainicial,
+     ocorrencia."horatransmissao" AS ocorrencia_horatransmissao,
+     ocorrencia."kmfinal" AS ocorrencia_kmfinal,
+     ocorrencia."kminicial" AS ocorrencia_kminicial,
+     ocorrencia."materiais" AS ocorrencia_materiais,
+     ocorrencia."numero" AS ocorrencia_numero,
+     ocorrencia."referencia" AS ocorrencia_referencia,
+     ocorrencia."rua" AS ocorrencia_rua,
+     ocorrencia."serie" AS ocorrencia_serie,
+     ocorrencia."setor" AS ocorrencia_setor,
+     ocorrencia."vtr" AS ocorrencia_vtr,
+     ocorrencia."policial_codigo" AS ocorrencia_policial_codigo,
+     servidor."type" AS servidor_type,
+     servidor."codigo" AS servidor_codigo,
+     servidor."cargo" AS servidor_cargo,
+     servidor."cpf" AS servidor_cpf,
+     servidor."datanascimento" AS servidor_datanascimento,
+     servidor."imagem" AS servidor_imagem,
+     servidor."nome" AS servidor_nome,
+     servidor."num_matricula" AS servidor_num_matricula,
+     servidor."rg" AS servidor_rg,
+     servidor."sexo" AS servidor_sexo,
+     servidor."unidade_sucap" AS servidor_unidade_sucap,
+     pessoasrelacionadas."codigo" AS pessoasrelacionadas_codigo,
+     pessoasrelacionadas."cnh" AS pessoasrelacionadas_cnh,
+     pessoasrelacionadas."endereco" AS pessoasrelacionadas_endereco,
+     pessoasrelacionadas."estadocivil" AS pessoasrelacionadas_estadocivil,
+     pessoasrelacionadas."idade" AS pessoasrelacionadas_idade,
+     pessoasrelacionadas."nome" AS pessoasrelacionadas_nome,
+     pessoasrelacionadas."profissao" AS pessoasrelacionadas_profissao,
+     pessoasrelacionadas."rg" AS pessoasrelacionadas_rg,
+     pessoasrelacionadas."situacao" AS pessoasrelacionadas_situacao,
+     ocorrencia_pessoasrelacionadas."ocorrencia_codigo" AS ocorrencia_pessoasrelacionadas_ocorrencia_codigo,
+     ocorrencia_pessoasrelacionadas."pessoas_codigo" AS ocorrencia_pessoasrelacionadas_pessoas_codigo
+FROM
+     "public"."servidor" servidor INNER JOIN "public"."ocorrencia" ocorrencia ON servidor."codigo" = ocorrencia."policial_codigo"
+     INNER JOIN "public"."ocorrencia_pessoasrelacionadas" ocorrencia_pessoasrelacionadas ON ocorrencia."codigo" = ocorrencia_pessoasrelacionadas."ocorrencia_codigo"
+     INNER JOIN "public"."pessoasrelacionadas" pessoasrelacionadas ON ocorrencia_pessoasrelacionadas."pessoas_codigo" = pessoasrelacionadas."codigo"
+WHERE
+     ocorrencia."codigo" = $P{cod}
+and
+    ocorrencia_pessoasrelacionadas."ocorrencia_codigo" = $P{cod}]]>
+	</queryString>
+	<field name="ocorrencia_codigo" class="java.lang.Integer"/>
+	<field name="ocorrencia_bairro" class="java.lang.String"/>
+	<field name="ocorrencia_data" class="java.sql.Date"/>
+	<field name="ocorrencia_historico" class="java.lang.String"/>
+	<field name="ocorrencia_horachegada" class="java.lang.String"/>
+	<field name="ocorrencia_horafinal" class="java.lang.String"/>
+	<field name="ocorrencia_horainicial" class="java.lang.String"/>
+	<field name="ocorrencia_horatransmissao" class="java.lang.String"/>
+	<field name="ocorrencia_kmfinal" class="java.lang.Integer"/>
+	<field name="ocorrencia_kminicial" class="java.lang.Integer"/>
+	<field name="ocorrencia_materiais" class="java.lang.String"/>
+	<field name="ocorrencia_numero" class="java.lang.Integer"/>
+	<field name="ocorrencia_referencia" class="java.lang.String"/>
+	<field name="ocorrencia_rua" class="java.lang.String"/>
+	<field name="ocorrencia_serie" class="java.lang.String"/>
+	<field name="ocorrencia_setor" class="java.lang.String"/>
+	<field name="ocorrencia_vtr" class="java.lang.String"/>
+	<field name="ocorrencia_policial_codigo" class="java.lang.Integer"/>
+	<field name="servidor_type" class="java.lang.String"/>
+	<field name="servidor_codigo" class="java.lang.Integer"/>
+	<field name="servidor_cargo" class="java.lang.String"/>
+	<field name="servidor_cpf" class="java.lang.String"/>
+	<field name="servidor_datanascimento" class="java.sql.Date"/>
+	<field name="servidor_imagem" class="java.lang.Long"/>
+	<field name="servidor_nome" class="java.lang.String"/>
+	<field name="servidor_num_matricula" class="java.lang.String"/>
+	<field name="servidor_rg" class="java.lang.String"/>
+	<field name="servidor_sexo" class="java.lang.String"/>
+	<field name="servidor_unidade_sucap" class="java.lang.String"/>
+	<field name="pessoasrelacionadas_codigo" class="java.lang.Integer"/>
+	<field name="pessoasrelacionadas_cnh" class="java.lang.String"/>
+	<field name="pessoasrelacionadas_endereco" class="java.lang.String"/>
+	<field name="pessoasrelacionadas_estadocivil" class="java.lang.String"/>
+	<field name="pessoasrelacionadas_idade" class="java.lang.Integer"/>
+	<field name="pessoasrelacionadas_nome" class="java.lang.String"/>
+	<field name="pessoasrelacionadas_profissao" class="java.lang.String"/>
+	<field name="pessoasrelacionadas_rg" class="java.lang.String"/>
+	<field name="pessoasrelacionadas_situacao" class="java.lang.String"/>
+	<field name="ocorrencia_pessoasrelacionadas_ocorrencia_codigo" class="java.lang.Integer"/>
+	<field name="ocorrencia_pessoasrelacionadas_pessoas_codigo" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="198" splitType="Stretch">
+			<textField>
+				<reportElement x="383" y="64" width="49" height="20" uuid="969c28d7-0213-4d7e-80b0-ebbff87b84ac"/>
+				<box leftPadding="2" bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ocorrencia_horafinal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="13" y="64" width="70" height="20" uuid="89d526f6-a546-4a20-a36d-e694437faf72"/>
+				<box leftPadding="2" bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ocorrencia_vtr}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="64" width="92" height="20" uuid="8fb76a49-6777-4605-9908-52da8ffa1f22"/>
+				<box leftPadding="2" bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ocorrencia_setor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="158" y="44" width="58" height="20" uuid="cde06fbd-e623-493c-987e-fd675d76624a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="443" y="12" width="37" height="20" uuid="bf8548de-c897-465a-a8b2-fc3801fd841b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cód.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="432" y="44" width="53" height="20" uuid="f30c4efd-2e0d-4978-998f-63769b8b8b84"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[H/Ch]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="83" y="64" width="75" height="20" uuid="bcc960ab-a6ea-4082-adb0-7abf8c197fc1"/>
+				<box leftPadding="2" bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+			</textField>
+			<staticText>
+				<reportElement x="216" y="44" width="92" height="20" uuid="d492b75b-65f8-41c3-9258-729e33257bdb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zona/Setor]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="308" y="64" width="75" height="20" uuid="bec91059-08ff-4cba-aa35-1fff741f9bdc"/>
+				<box leftPadding="2" bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ocorrencia_horatransmissao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="158" y="64" width="58" height="20" uuid="ee0e0666-446e-41f0-abff-7016486883e8"/>
+				<box leftPadding="2" bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ocorrencia_data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="488" y="12" width="46" height="20" uuid="d68f8ff8-e9d8-4201-969a-9c3476bbd975"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ocorrencia_codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="485" y="64" width="50" height="20" uuid="8b2f5c35-5157-4bc7-937e-5e9f63c9c50b"/>
+				<box leftPadding="2" bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ocorrencia_horafinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="383" y="44" width="49" height="20" uuid="ae0882e2-0d63-4470-9948-4091932590ce"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[H/ini]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="485" y="44" width="49" height="20" uuid="fe513e6c-aa98-446a-99d6-875027681eeb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[H/Fin]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="432" y="64" width="53" height="20" uuid="2524ba87-b632-4f46-a90c-cd9590fa63a9"/>
+				<box leftPadding="2" bottomPadding="0" rightPadding="2">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ocorrencia_horachegada}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="12" width="275" height="20" uuid="cf2aac97-71c6-4e5b-b20a-44140d7c583a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE OCORRÊNCIA POLICIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="0" width="87" height="32" uuid="da868a3c-a582-4297-8d20-3022dc4389d7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PMRR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="83" y="44" width="75" height="20" uuid="c8c8de82-42b5-424d-b84a-2d4d79d6babd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUCp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="44" width="71" height="20" uuid="fe05a751-5123-4672-bd08-fa6786503e6e"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Vtr]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="44" width="75" height="20" uuid="be4fd3c9-a409-4dee-90ca-62ad5e95de44"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[H/Transm]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="438" y="113" width="70" height="40" uuid="e726ccbd-a181-46c9-a366-dded73a036fb"/>
+				<box bottomPadding="0">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ocorrencia_kmfinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="37" y="93" width="107" height="20" uuid="1d8fb7ff-07ba-4b64-8186-378733c68e12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cód. Tipo Oc]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="113" width="78" height="40" uuid="fd9d8663-9e51-413e-9c5b-10b0db07058f"/>
+				<box bottomPadding="0">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ocorrencia_kminicial}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement x="253" y="113" width="107" height="40" uuid="25a9b38b-8520-42b8-988e-40d90f87d8a1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<componentElement>
+					<reportElement x="0" y="0" width="107" height="40" uuid="7cf8afa6-6b68-4605-9d1d-9d5ea3b6c03c"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Horizontal" ignoreWidth="false">
+						<datasetRun subDataset="dataset3" uuid="3592d74e-824c-4f2c-b2b6-646b07ade65d">
+							<datasetParameter name="id3">
+								<datasetParameterExpression><![CDATA[$F{ocorrencia_codigo}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="40" width="29">
+							<textField>
+								<reportElement x="0" y="0" width="27" height="40" uuid="324eebb1-047c-4f25-8ebc-8245dcbc047a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{ocorrencia_tiposervicoprestado_tiposervicoprestado_codigo}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+			</frame>
+			<staticText>
+				<reportElement x="438" y="93" width="68" height="20" uuid="8055b0bd-99ea-4ff6-b193-d242d985dcf3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Km/Final]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="144" y="113" width="109" height="40" uuid="d2a4433e-cdbd-4983-9fad-e7e8331b62e2"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<componentElement>
+					<reportElement x="0" y="0" width="109" height="40" uuid="dd2d94a2-93dc-47a4-8883-a7d1947537df"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Horizontal" ignoreWidth="false">
+						<datasetRun subDataset="dataset2" uuid="219dd439-499b-46bd-985d-5dc3c2148beb">
+							<datasetParameter name="id2">
+								<datasetParameterExpression><![CDATA[$F{ocorrencia_codigo}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="40" width="29">
+							<textField>
+								<reportElement x="0" y="0" width="29" height="40" uuid="1ae7f18a-af9c-451c-8925-ec9daf869c96"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{ocorrencia_tipoprovidencia_tipoprovidencia_codigo}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+			</frame>
+			<staticText>
+				<reportElement x="144" y="93" width="109" height="20" uuid="1ffa170e-ef25-4268-a9b9-7ab65ffbde9d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cód. Tipo Prov]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="253" y="93" width="107" height="20" uuid="55eb0655-c18d-417a-8a1c-116f6f176180"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cód. Tipo Serv. Prest.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="93" width="78" height="20" uuid="d2cae662-88db-4cd2-8078-a84632d5aae1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Km/Inicial]]></text>
+			</staticText>
+			<elementGroup/>
+			<frame>
+				<reportElement x="37" y="113" width="107" height="40" uuid="b1de9f6d-a432-45a7-bd50-8e50e9a7e41a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<componentElement>
+					<reportElement x="0" y="0" width="107" height="40" uuid="18e4eaf0-d482-49a4-bdd6-d6fa83b5089f"/>
+					<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Horizontal" ignoreWidth="false">
+						<datasetRun subDataset="dataset1" uuid="07278b1f-7698-41c3-a6c7-135f71448dc2">
+							<datasetParameter name="id">
+								<datasetParameterExpression><![CDATA[$F{ocorrencia_codigo}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:listContents height="40" width="29">
+							<textField>
+								<reportElement x="0" y="0" width="28" height="40" uuid="62a9c9da-4d9f-4681-aa5f-78fd05f85803"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{ocorrencia_tipoocorrencia_ocorrencia_codigo}]]></textFieldExpression>
+							</textField>
+						</jr:listContents>
+					</jr:list>
+				</componentElement>
+			</frame>
+			<staticText>
+				<reportElement mode="Opaque" x="11" y="177" width="523" height="20" backcolor="#CCCCCC" uuid="44ea21c1-a6d8-4eac-b57d-e3716c4af990"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PESSOAS RELACIONADAS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="97" splitType="Stretch">
+			<textField>
+				<reportElement x="429" y="33" width="104" height="20" uuid="69d14120-aa25-46de-b967-f510bf6da481"/>
+				<box leftPadding="3" bottomPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pessoasrelacionadas_cnh}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="13" width="198" height="20" uuid="5c04fff5-8a73-4204-bff1-42c94f8ccd06"/>
+				<box leftPadding="3" bottomPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pessoasrelacionadas_nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="13" width="53" height="20" uuid="ec143ca1-e715-4b06-ad8d-495b7448bb72"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="53" width="53" height="20" uuid="7004bfa1-c485-482d-bc4c-1df2368c164a"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endereço:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="53" width="469" height="20" uuid="5bf64709-8ec1-4c25-8ea4-883402f474d2"/>
+				<box leftPadding="3" bottomPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pessoasrelacionadas_endereco}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="389" y="33" width="40" height="20" uuid="9b178e4a-5886-4a7f-b656-4293ee07e393"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CNH:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="13" width="40" height="20" uuid="9e73934e-c910-4814-a524-d4dd3f3008ad"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Idade:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="429" y="13" width="104" height="20" uuid="c8978a7e-9de8-4217-9ceb-ca901f12a30a"/>
+				<box leftPadding="3" bottomPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pessoasrelacionadas_estadocivil}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="13" width="57" height="20" uuid="1586597a-6477-4fda-b6e5-c5fdb3298c39"/>
+				<box leftPadding="3" bottomPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pessoasrelacionadas_idade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="33" width="198" height="20" uuid="6c0f5cd1-4138-43df-9627-e33f4b32e570"/>
+				<box leftPadding="3" bottomPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pessoasrelacionadas_profissao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="389" y="13" width="40" height="20" uuid="5be20835-9ec3-478f-ae30-5ab4591bfe06"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[E. Civil:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="303" y="33" width="57" height="20" uuid="c55bf849-a062-471a-a3c1-8b4e57862d9d"/>
+				<box leftPadding="3" bottomPadding="0">
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{pessoasrelacionadas_rg}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="13" y="33" width="53" height="20" uuid="825ae911-7daa-4dd6-9ab4-01dc8313a075"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Profissão:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="33" width="40" height="20" uuid="06a37d40-b061-4d67-a18e-b9c4be332ede"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[RG:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="11" y="83" width="522" height="1" uuid="635dba64-945c-44ca-ba7e-0846e6c91231"/>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="384" splitType="Stretch">
+			<textField>
+				<reportElement x="16" y="40" width="522" height="56" uuid="cfbaa4c2-623b-4254-86dd-cb856980a25e"/>
+				<box topPadding="1" leftPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{ocorrencia_materiais}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="16" y="215" width="157" height="23" uuid="19529666-925e-4f4a-a87d-aac94a9d5fd9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{servidor_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="215" width="109" height="20" uuid="975bca59-63e4-4447-aee5-d83261fafcc8"/>
+				<box leftPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{servidor_cargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="215" width="105" height="20" uuid="4ae36437-4988-4740-892d-129eb81a5031"/>
+				<box leftPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{servidor_unidade_sucap}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="12" y="136" width="522" height="56" uuid="3051cf07-3e5e-490e-9547-39116247da32"/>
+				<box topPadding="1" leftPadding="1" rightPadding="1">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Justified"/>
+				<textFieldExpression><![CDATA[$F{ocorrencia_historico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="16" y="20" width="522" height="20" backcolor="#CCCCCC" uuid="fb012429-72eb-4499-b480-54313afda026"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ARMAS, OBJETOS, VALORES, MATERIAIS, APREENDIDOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="193" y="215" width="87" height="20" uuid="2215bfe8-3be6-4681-ab9f-1f587e3ce866"/>
+				<box leftPadding="1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{servidor_num_matricula}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="12" y="106" width="522" height="20" backcolor="#CCCCCC" uuid="a28b89da-ad56-4f2d-a96f-912e9a930d70"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HISTÓRICO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="16" y="238" width="157" height="20" uuid="fcdc20ac-0e1f-439d-abab-a40b2aa32034"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="429" y="238" width="105" height="20" uuid="906c151e-3032-4527-99aa-e3d427f62ef1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Suop]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="193" y="238" width="87" height="20" uuid="1ca67e09-1481-45f9-a6a2-a16d7d5d2220"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Matrícula]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="303" y="238" width="109" height="20" uuid="454121ae-be1e-46f8-ae9a-ad2934eb13f1"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Posto/Grad]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

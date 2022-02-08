@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./paginaInicial.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="centroAdmin">
+        <h:form id="frm">
+            <p:growl autoUpdate="true"/>
+            <div class="ui-fluid">
+                <center>
+                    <p:panel id="panelPrincipal" header="CADASTRO DE OCORRENCIA" style="margin-top: 10px; width: 80%;">
+
+                        <p:panelGrid style="margin-top: 10px" columns="4" layout="grid" >
+
+                            <p:outputLabel value="Vtr:"/>
+                            <p:inputText value="#{usuarioControler.ocorrencia.vtr}"/>  
+
+                            <p:outputLabel value="Serie"/>
+                            <p:selectOneMenu value="#{usuarioControler.ocorrencia.serie}">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItem itemLabel="A" itemValue="A"/>
+                                <f:selectItem itemLabel="B" itemValue="B"/>
+                                <f:selectItem itemLabel="C" itemValue="C"/>
+                                <f:selectItem itemLabel="J" itemValue="J"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="S/Setor:"/>
+                            <p:selectOneMenu value="#{usuarioControler.ocorrencia.setor}">
+                                <f:selectItem itemLabel="ZONA NORTE" itemValue="ZONA NORTE"/>
+                                <f:selectItem itemLabel="ZONA SUL" itemValue="ZONA SUL"/>
+                                <f:selectItem itemLabel="ZONA LESTE" itemValue="ZONA LESTE"/>
+                                <f:selectItem itemLabel="ZONA OESTE" itemValue="ZONA OESTE"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="H/Transm:"/>
+                            <p:inputMask mask="99:99" value="#{usuarioControler.ocorrencia.horaTransmissao}"/>
+
+                            <p:outputLabel value="H/inicial:"/>
+                            <p:inputMask mask="99:99" value="#{usuarioControler.ocorrencia.horaInicial}"/>
+
+                            <p:outputLabel value="H/Chegada:"/>
+                            <p:inputMask mask="99:99" value="#{usuarioControler.ocorrencia.horaChegada}"/>
+
+                            <p:outputLabel value="H/Final:"/>
+                            <p:inputMask mask="99:99" value="#{usuarioControler.ocorrencia.horaFinal}"/>
+
+                            <p:outputLabel value="Cod/oc: " />
+                            <p:selectCheckboxMenu id="ocorrencia" value="#{usuarioControler.listTipoOcorrencias2}" 
+                                                  label="Tipo de Ocorrencia" 
+                                                  converter="converteTipoOcorrencia"
+                                                  filter="true" scrollHeight="150">
+                                <f:selectItems value="#{usuarioControler.listTipoOcorrencias}" var="oc" 
+                                               itemLabel="#{oc.descricao}" 
+                                               itemValue="#{oc}"/>
+                            </p:selectCheckboxMenu>
+
+                            <p:outputLabel value="Cod/Prov: " />
+                            <p:selectCheckboxMenu id="providencia" value="#{usuarioControler.listTipoProvidencias2}"
+                                                  label="Tipo de Providência" 
+                                                  converter="converteTipoProvidencia"
+                                                  filter="true" scrollHeight="150">
+                                <f:selectItems value="#{usuarioControler.listTipoProvidencias}" var="prov"
+                                               itemLabel="#{prov.descricao} - #{prov.codProvidencia}" 
+                                               itemValue="#{prov}"/>
+                            </p:selectCheckboxMenu>
+
+                            <p:outputLabel  value="Cod/serv: " />
+                            <p:selectCheckboxMenu id="servico" value="#{usuarioControler.listTipoServicos2}"
+                                                  label="Tipo de Serviços" 
+                                                  converter="converteTipoServicoPrestado"
+                                                  filter="true" scrollHeight="150">
+                                <f:selectItems value="#{usuarioControler.listTipoServicos}" var="serv" 
+                                               itemLabel="#{serv.codServicoPrestado} - #{serv.descricao}" 
+                                               itemValue="#{serv}"/>
+                            </p:selectCheckboxMenu>
+
+                            <p:outputLabel value="Km/ini:"/>
+                            <p:inputText value="#{usuarioControler.ocorrencia.kmInicial}"/>
+
+                            <p:outputLabel value="Km/Fin:"/>
+                            <p:inputText value="#{usuarioControler.ocorrencia.kmFinal}"/>
+
+                            <p:outputLabel value="Armas, Objetos, Valores, Materiais Apreendidos:"/>
+                            <p:inputTextarea  value="#{usuarioControler.ocorrencia.materiais}"/>
+
+                        </p:panelGrid>
+
+                        <h:panelGroup>
+                            <p:dataList value="#{usuarioControler.pessoas}" var="pessoa"
+                                        type="ordered" emptyMessage="Adicione Pessoas Relacionas">
+                                <p:panelGrid columns="16" layout="grid">
+                                    <p:outputLabel value="Nome:"/>
+                                    <p:inputText value="#{pessoa.nome}"/>
+                                    <p:outputLabel value="Idade:"/>
+                                    <p:inputText value="#{pessoa.idade}"/>
+                                    <p:outputLabel value="Profissão:"/>
+                                    <p:inputText value="#{pessoa.profissao}"/>
+                                    <p:outputLabel value="Estado Civil:"/>
+                                    <p:inputText value="#{pessoa.estadoCivil}"/>
+                                    <p:outputLabel value="RG:"/>
+                                    <p:inputText value="#{pessoa.rg}"/>
+                                    <p:outputLabel value="CNH:"/>
+                                    <p:inputText value="#{pessoa.cnh}"/>
+                                    <p:outputLabel value="Situação:"/>
+                                    <p:inputText value="#{pessoa.situacao}"/>
+                                    <p:outputLabel value="Endereço:"/>
+                                    <p:inputText value="#{pessoa.endereco}"/>
+                                </p:panelGrid>
+
+                            </p:dataList>
+                            <p:commandButton icon="fa fa-user-plus" label="Adicionar Pessoa" title="Adicionar Pessoa"
+                                             action="#{usuarioControler.addNovaPessoa()}" update="panelPrincipal"
+                                             style="width: 30%"/>
+                        </h:panelGroup>                        
+
+                        <p:separator rendered="#{usuarioControler.renderizar}" style="background-color: #ffff99;height: 4%" >
+                            <h3>PESSOA RELACIONADA</h3>
+                        </p:separator>
+
+
+
+                        <p:panelGrid columns="4" layout="grid" rendered="#{usuarioControler.renderizar}">
+
+
+                            <p:outputLabel value="Nome:"/>
+                            <p:inputText value="#{usuarioControler.pessoa.nome}"/>
+                            <p:outputLabel value="Idade:"/>
+                            <p:inputText value="#{usuarioControler.pessoa.idade}"/>
+                            <p:outputLabel value="Profissão:"/>
+                            <p:inputText value="#{usuarioControler.pessoa.profissao}"/>
+                            <p:outputLabel value="Estado Civil:"/>
+                            <p:inputText value="#{usuarioControler.pessoa.estadoCivil}"/>
+                            <p:outputLabel value="RG:"/>
+                            <p:inputText value="#{usuarioControler.pessoa.rg}"/>
+                            <p:outputLabel value="CNH:"/>
+                            <p:inputText value="#{usuarioControler.pessoa.cnh}"/>
+                            <p:outputLabel value="Situação:"/>
+                            <p:inputText value="#{usuarioControler.pessoa.situacao}"/>
+                            <p:outputLabel value="Endereço:"/>
+                            <p:inputText value="#{usuarioControler.pessoa.endereco}"/>
+
+                            <f:facet name="footer" >
+                                <center>
+                                    <p:commandButton value="Cancelar" action="#{usuarioControler.fecharFormPessoa()}" 
+                                                     style="width: auto;"  update="panelPrincipal"/>
+                                    <p:commandButton value="Adicionar Pessoa" action="#{usuarioControler.addPessoa()}"
+                                                     update="panelPrincipal" style="width: auto;" />
+                                </center>
+                            </f:facet>
+
+                        </p:panelGrid>
+                        <p:separator rendered="#{usuarioControler.renderizar}" style="background-color: #ffff99;height: 4%" />
+                        <p:separator>
+                            <h3>LOCAL DA OCORRÊNCIA</h3>
+                        </p:separator>
+                        <p:panelGrid columns="4" layout="grid" >
+                            <p:outputLabel value="rua"/>
+                            <p:inputText value="#{usuarioControler.ocorrencia.rua}"/>
+                            <p:outputLabel value="bairro"/>
+                            <p:inputText value="#{usuarioControler.ocorrencia.bairro}"/>
+                            <p:outputLabel value="referência"/>
+                            <p:inputText value="#{usuarioControler.ocorrencia.referencia}"/>
+                            <p:outputLabel value="Numéro"/>
+                            <p:inputText value="#{usuarioControler.ocorrencia.numero}"/>
+                        </p:panelGrid>
+
+                        <h2>Histórico</h2>
+                        <h:panelGroup>
+                            <p:inputTextarea placeholder="Escreva aqui..." value="#{usuarioControler.ocorrencia.historico}"/>
+                        </h:panelGroup>
+
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        <p:commandButton value="enviar" action="#{usuarioControler.inserirOcorrencia()}" style="width: 30%"/>
+                    </p:panel>
+                </center>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

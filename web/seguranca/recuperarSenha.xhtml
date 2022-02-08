@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link rel="shortcut icon" href="/resources/imagens/logo.ico" type="image/x-icon"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/StyleLogin.css"/>
+        <title>Recuperar Senha</title>
+    </h:head>
+    <h:body id="bodylogin">
+        <h:form>
+
+            <center>
+                <div class="ui-g">
+                    <div class="ui-g-12 top">
+                        <p:graphicImage class="imgLogin" name="imagens/lupa.png"/>
+                        <p:outputLabel class="sigla" value="SSEPP"/>
+                        <p:outputLabel class="sigla2" value="- Sistema de Solicitação de Exame Pericial Papiloscópico"/>
+                    </div>
+                </div>
+            </center>
+        </h:form>
+
+
+
+        <h:form id="formLogin">
+            <center>
+                <p:messages id="msg" />
+
+                <p:panel header="Recuperar Senha" styleClass="ui-fluid">
+                    <p:panelGrid id="grid" columns="1" layout="grid" class="gridLogin">
+
+
+                        <h:panelGroup >
+                            <p:inputText id="matricula" placeholder="Nº da Matrícula" required="true"
+                                         />
+                            <p:message for="matricula" showSummary="true" showDetail="true"/>
+                        </h:panelGroup>
+
+
+
+                        <h:panelGroup >
+                            <p:inputMask mask="99/99/9999" id="dataNascimento" placeholder="Data de Nascimento" 
+                                         required="true"
+                                         />
+                            <p:message for="dataNascimento" showSummary="true" showDetail="true"/>
+                        </h:panelGroup>
+
+                        <p:commandButton id="dd" class="b1" value="Nova Senha" 
+                                         actionListener="#{usuarioControler.recuperarSenha}"
+                                         oncomplete="#{usuarioControler.dialRecuperarSenha}"
+                                         update="msg" 
+                                         process="grid"/>
+                        <p:commandButton value="Voltar" action="login?faces-redirect=true"
+                                         process="@this"/>
+
+
+                    </p:panelGrid>
+                </p:panel>
+            </center>
+            <p:dialog widgetVar="dialRecuperSenha" closeOnEscape="true" modal="true" id="dialogoRecuperSenha" 
+                      responsive="true"
+                      resizable="false"
+                      position="center"
+                      positionType="fixed"
+                      draggable="false"> 
+                <p:messages id="msgDial"/>
+                <p:panelGrid columns="1" layout="grid" >
+
+
+                    <h:panelGroup>
+                        <p:password required="true" id="senhaText" placeholder="Senha" />
+                        <p:message for="senhaText" showDetail="true" showSummary="true"/>
+                    </h:panelGroup>
+
+                    <h:panelGroup>
+                        <p:password required="true" id="confSenhaText" placeholder="Confirma Senha" />
+                        <p:message for="confSenhaText" showDetail="true" showSummary="true"/>
+                    </h:panelGroup>
+
+                    <p:commandButton id="btSalvar" class="b1" value="Salvar Nova Senha" 
+                                     process="dialogoRecuperSenha"
+                                     update="msgDial" />
+
+
+                </p:panelGrid>
+
+            </p:dialog>
+
+        </h:form>
+        <center>
+            <div class="ui-g">
+                <div class="ui-g-12 rodape" style="background: #222a35;">
+                    <p:outputLabel class="l1" value="Sistema Desenvolvido Por:"/><br/>
+                    <p:outputLabel class="l2" value="Abel do Espirito Santo"/><br/>
+                    <p:outputLabel class="l2" value="Jean Perreira da Silva "/><br/>
+                    <p:outputLabel class="l2" value="Maria Jeane Oliveira Silva"/><br/>
+                </div>
+            </div>
+        </center>
+
+    </h:body>
+</html>
+

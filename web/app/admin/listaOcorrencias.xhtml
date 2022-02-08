@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./paginaInicial.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="centroAdmin">
+        <h:form id="formu">
+            <p:messages autoUpdate="true" closable="true"/>
+            <center>
+                <p:panel header="OCORRENCIAS" style="margin-top: 5px; width: 80%" styleClass="ui-fluid">
+                    <p:dataTable value="#{usuarioControler.listOcorrencias}" var="ocorrencia" rows="3" paginator="true"
+                                 reflow="true" rowHover="true" saveOnCellBlur="true" 
+                                 paginatorPosition="bottom" id="pes_tip_ocorrencia" style="margin-top: 5px" 
+                                 filteredValue="#{tipoOcorrenciaController.filtroOcorrencia}" emptyMessage="Não há Ocorrências">
+
+                        <p:column headerText="Código de Ocorrência" width="auto">
+                            <center>
+                                #{ocorrencia.codigo}
+                            </center>
+                        </p:column>
+                        <p:column headerText="Bairro">
+                            #{ocorrencia.bairro}
+                        </p:column>
+                        <p:column headerText="Data" width="auto">
+                            <h:outputText value="#{ocorrencia.data}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" dateStyle="full" locale="pt_BR"/>
+                            </h:outputText>
+                        </p:column>
+                        <p:column headerText="Hora Inicial" priority="4">
+                            #{ocorrencia.horaInicial}
+                        </p:column>
+                        <p:column headerText="Hora Chegada" priority="5">
+                            #{ocorrencia.horaChegada}
+                        </p:column>
+                        <p:column headerText="Hora Final" priority="4">
+                            #{ocorrencia.horaFinal}
+                        </p:column>
+                        <p:column headerText="Hora Transmissao" priority="5">
+                            #{ocorrencia.horaTransmissao}
+                        </p:column>
+                        <p:column headerText="Km Inicial" priority="4">
+                            #{ocorrencia.kmInicial}
+                        </p:column>
+                        <p:column headerText="Km Final" priority="4">
+                            #{ocorrencia.kmFinal}
+                        </p:column>
+                        <p:column headerText="Serie" priority="4">
+                            #{ocorrencia.serie}
+                        </p:column>
+
+                        <p:column headerText="Numero">
+                            #{ocorrencia.numero}
+                        </p:column>
+                        <p:column headerText="Rua">
+                            #{ocorrencia.rua}
+                        </p:column>
+                        <p:column headerText="Referencia" priority="5">
+                            #{ocorrencia.referencia}
+                        </p:column>
+                        <p:column headerText="Materiais" priority="5">
+                            #{ocorrencia.materiais}
+                        </p:column>
+                        <p:column headerText="Unidade" priority="6">
+                            #{ocorrencia.serie}
+                        </p:column>
+
+                        <p:column headerText="Setor" priority="6">
+                            #{ocorrencia.setor}
+                        </p:column>
+
+                        <p:column headerText="Ação" width="auto">
+                            <p:commandButton icon="ui-icon-image" title="visualizar" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </center>
+        </h:form>
+        <h:form>
+            <p:confirmDialog global="true" responsive="true" showEffect="fade" hideEffect="fade" >
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no"/>
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes"/>
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

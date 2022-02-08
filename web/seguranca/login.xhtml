@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link rel="shortcut icon" href="/resources/imagens/logo.ico" type="image/x-icon"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <h:outputStylesheet name="./css/default.css"/>
+        <title>Login</title>
+    </h:head>
+    <h:body id="bodylogin">
+        <h:form>
+
+            <center>
+                <div class="ui-g">
+                    <div class="ui-g-12 top">
+                        <h1>ROP - Relatório Ocorrência Policial</h1>
+                    </div>
+                </div>
+            </center>
+        </h:form>
+
+
+
+        <h:form id="formLogin">
+            <center>
+                <p:messages id="msg" />
+
+                <p:panel id="panel" header="Login" class="panelLogin" style="width: 70%">
+                    <p:focus context="grid"/>
+                    <p:panelGrid id="grid" columns="1" layout="grid" class="gridLogin" columnClasses="campo">
+
+
+                        <h:panelGroup >
+                            <p:inputText id="loginText" placeholder="Login" required="true" 
+                                         value="#{usuarioControler.ub.login}" />
+                            <p:message for="loginText" showSummary="true" showDetail="true"/>
+
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            <p:password required="true" id="senhaText" placeholder="Senha" value="#{usuarioControler.ub.senha}"/>
+                            <p:message for="senhaText" showDetail="true" showSummary="true"/>
+                        </h:panelGroup>
+
+                        <p:commandButton id="dd" class="b1" value="Logar" action="#{usuarioControler.logarSistema()}" 
+                                         update="msg" />
+
+                        <f:facet name="footer" >
+                           
+                        </f:facet>
+
+                    </p:panelGrid>
+                </p:panel>
+            </center>
+
+            <p:ajaxStatus onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+
+            <p:dialog width="85" height="60"  widgetVar="statusDialog" modal="true"  
+                      fitViewport="true"
+                      draggable="false" closable="false" resizable="false" showHeader="false">
+                <center>
+                    <p:graphicImage style="margin-top: 10px" width="50" height="45"  name="imagens/logando.gif" />
+                </center>
+            </p:dialog>
+
+        </h:form>
+        <center>
+            <div class="ui-g">
+                <div class="ui-g-12 rodape" style="background: #d9e0e7;">
+                    <p:outputLabel class="l1" value="Sistema ROP"/>
+                </div>
+            </div>
+        </center>
+
+    </h:body>
+</html>
+
